@@ -1,0 +1,1 @@
+<view class="content"><view class="background-box" style="{{a}}"></view><image class="album-pic" style="{{b}}"></image><text class="music-name">{{c}}</text><text class="music-singer">{{d}}</text><button bindtap="{{e}}">停止播放</button><button bindtap="{{f}}">开始播放</button></view>

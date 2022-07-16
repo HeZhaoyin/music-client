@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "音乐",
+  "usingComponents": {
+    "player-bottom": "./components/PlayerBottom",
+    "lrc-area": "./components/LrcArea"
+  }
+}

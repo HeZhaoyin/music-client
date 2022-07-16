@@ -1,0 +1,1 @@
+"use strict";var e=require("../utils/request.js");exports.getMusicDetailByID=s=>e.request({url:`/song/detail?ids=${s}`,method:"GET"}),exports.getMusicUrlByID=s=>e.request({url:`/song/url?id=${s}`,method:"GET"});

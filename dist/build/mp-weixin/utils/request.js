@@ -1,0 +1,1 @@
+"use strict";var e=require("../common/vendor.js");exports.request=t=>new Promise(((o,r)=>{!function(t,o,r){e.index.request({url:"http://192.168.50.127:3000"+t.url,method:t.method,data:t.data,success:e=>o(e.data),fail:e=>(console.log("fail",e),r(e))})}(t,o,r)}));

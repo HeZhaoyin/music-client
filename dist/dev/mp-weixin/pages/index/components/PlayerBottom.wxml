@@ -1,0 +1,1 @@
+<view style="{{a}}" dragable="true" class="player-bottom-box" catchtouchstart="{{b}}" catchtouchmove="{{c}}"><music-controller u-i="534823b6-0" bind:__l="__l"></music-controller></view>
