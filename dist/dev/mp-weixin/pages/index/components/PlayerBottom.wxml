@@ -1,1 +1,1 @@
-<view style="{{a}}" dragable="true" class="player-bottom-box" catchtouchstart="{{b}}" catchtouchmove="{{c}}"><music-controller u-i="534823b6-0" bind:__l="__l"></music-controller></view>
+<view style="{{b}}" dragable="true" class="player-bottom-box" bindtouchstart="{{c}}" bindtouchmove="{{d}}"><music-controller u-i="534823b6-0" bind:__l="__l"></music-controller><scroll-view scroll-y="true" style="height:400rpx"><view wx:for="{{a}}" wx:for-item="i" style="color:black">{{i.a}}</view></scroll-view></view>

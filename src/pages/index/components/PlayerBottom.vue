@@ -3,10 +3,13 @@
     :style="'height:' + getPlayerBottomHeight + 'rpx'"
     dragable="true"
     class="player-bottom-box"
-    @touchstart.stop="playerBottomDragStart"
-    @touchmove.stop="playerBottomDragMove"
+    @touchstart.self="playerBottomDragStart"
+    @touchmove.self="playerBottomDragMove"
   >
     <music-controller></music-controller>
+    <scroll-view scroll-y="true" style="height:400rpx">
+      <view style="color:black" v-for="i in 100">{{ i }}</view>
+    </scroll-view>
   </view>
 </template>
 
@@ -23,6 +26,7 @@ const getPlayerBottomHeight = computed(() => {
 });
 
 const playerBottomDragStart = (event) => {
+  console.log("这里是touchstart");
   touchStartPos.value = event.touches[0].pageY;
 };
 

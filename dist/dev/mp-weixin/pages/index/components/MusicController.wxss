@@ -1,7 +1,7 @@
 
 .controller-box.data-v-abe9682e {
   width: 100vw;
-  height: 200rpx;
+  height: 120rpx;
   display: flex;
   justify-content: center;
   padding-top: 20rpx;

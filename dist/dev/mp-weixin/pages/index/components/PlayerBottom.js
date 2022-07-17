@@ -14,6 +14,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       return isOpen.value ? 800 : 200;
     });
     const playerBottomDragStart = (event) => {
+      console.log("\u8FD9\u91CC\u662Ftouchstart");
       touchStartPos.value = event.touches[0].pageY;
     };
     const playerBottomDragMove = (event) => {
@@ -27,9 +28,14 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     };
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.s("height:" + common_vendor.unref(getPlayerBottomHeight) + "rpx"),
-        b: common_vendor.o(playerBottomDragStart),
-        c: common_vendor.o(playerBottomDragMove)
+        a: common_vendor.f(100, (i, k0, i0) => {
+          return {
+            a: common_vendor.t(i)
+          };
+        }),
+        b: common_vendor.s("height:" + common_vendor.unref(getPlayerBottomHeight) + "rpx"),
+        c: common_vendor.o(playerBottomDragStart),
+        d: common_vendor.o(playerBottomDragMove)
       };
     };
   }

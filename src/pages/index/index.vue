@@ -1,5 +1,5 @@
 <template>
-  <view class="content">
+  <view class="content" @touchmove.stop.prevent>
     <view
       class="background-box"
       v-if="audioInfo.pic != ''"

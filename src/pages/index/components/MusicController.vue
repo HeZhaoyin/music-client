@@ -1,19 +1,19 @@
 <template>
-  <div class="controller-box">
-    <div class="controller-play-box">
-      <div class="play-btn-box" @touchstart="changePlayStatus">
-        <div :class="isPlay ? 'active' : ''" class="pause">
-          <div class="line line_1"></div>
-          <div class="line line_2"></div>
-        </div>
-        <div :class="isPlay ? '' : 'active'" class="play">
-          <div class="line line_1"></div>
-          <div class="line line_2"></div>
-          <div class="line line_3"></div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <view class="controller-box">
+    <view class="controller-play-box" @click="changePlayStatus">
+      <view class="play-btn-box">
+        <view :class="isPlay ? 'active' : ''" class="pause">
+          <view class="line line_1"></view>
+          <view class="line line_2"></view>
+        </view>
+        <view :class="isPlay ? '' : 'active'" class="play">
+          <view class="line line_1"></view>
+          <view class="line line_2"></view>
+          <view class="line line_3"></view>
+        </view>
+      </view>
+    </view>
+  </view>
 </template>
 
 <script lang="ts" setup>
@@ -43,7 +43,7 @@ const changePlayStatus = () => {
 <style scoped>
 .controller-box {
   width: 100vw;
-  height: 200rpx;
+  height: 120rpx;
   display: flex;
   justify-content: center;
   padding-top: 20rpx;

@@ -60,7 +60,9 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           ["music-i-d"]: common_vendor.unref(musicID),
           ["audio-cur-time"]: audioCurTime.value
         }),
-        i: common_vendor.o(OnChangeBottomOpen)
+        i: common_vendor.o(OnChangeBottomOpen),
+        j: common_vendor.o(() => {
+        })
       });
     };
   }
