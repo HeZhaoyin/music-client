@@ -4,10 +4,11 @@
       class="lrc-text-list-box"
       :style="
         'top:' +
-        contentHeight / 2 +
+        (contentHeight / 2 - 13) +
         'rpx;transform:translateY(' +
         lrcScrollTop +
         'px'
+         
       "
     >
       <span
@@ -107,7 +108,7 @@ let contentHeight = ref<number>(500);
 watch(
   () => props.audioCurTime,
   (time: number) => {
-    if (time != 0 && time > (arrLrc.value[activeIndex.value + 1].time - 0.6)) {
+    if (time != 0 && time > arrLrc.value[activeIndex.value + 1].time - 0.6) {
       activeIndex.value++;
 
       if (instance) {
@@ -127,12 +128,25 @@ watch(
   }
 );
 
-onMounted(() => {});
-
-getMusicLrcByID(props.musicID).then((lrcRes: any) => {
-  console.log(lrcRes);
-  arrLrc.value = formatMusicLyrics(lrcRes.lrc.lyric).lyric;
+onMounted(() => {
+  initLrcData();
 });
+
+watch(
+  () => props.musicID,
+  (musicID, oldMusicID) => {
+    initLrcData();
+  }
+);
+
+const initLrcData = () => {
+  getMusicLrcByID(props.musicID).then((lrcRes: any) => {
+    console.log(lrcRes);
+    activeIndex.value = 0;
+    lrcScrollTop.value = 0;
+    arrLrc.value = formatMusicLyrics(lrcRes.lrc.lyric).lyric;
+  });
+};
 
 const onBottomOpenChange = (isOpen: boolean) => {
   console.log("歌词组件触发了", isOpen);
@@ -174,7 +188,7 @@ defineExpose({
 
 .lrc-text {
   font-size: 36rpx;
-  color: rgb(105, 105, 105);
+  color: rgb(180, 180, 180);
   transition: color 0.6s linear;
 }
 

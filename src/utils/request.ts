@@ -1,7 +1,9 @@
 const url_all = {
-  dev: "http://192.168.50.127:3000", // 开发
+  dev: "http://192.168.31.125:3000", // 开发
+  prod: "https://www.hezhaoyin.com:2335"
 };
-let BASEURL = url_all["dev"];
+// let BASEURL = url_all["dev"];
+let BASEURL = url_all["prod"];
 
 function handleRequest(
   options: UniNamespace.RequestOptions,

@@ -18,28 +18,43 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       singer: "",
       pic: ""
     });
-    let musicID = 28403111;
-    apis_music.getMusicDetailByID(musicID).then((detailRes) => {
-      console.log(detailRes);
-      const musicDetail = detailRes.songs[0];
-      apis_music.getMusicUrlByID(musicID).then((res) => {
-        curAudio.title = musicDetail.name;
-        audioInfo.name = musicDetail.name;
-        curAudio.singer = musicDetail.ar[0].name;
-        audioInfo.singer = musicDetail.ar[0].name;
-        curAudio.coverImgUrl = musicDetail.al.picUrl;
-        audioInfo.pic = musicDetail.al.picUrl;
-        curAudio.src = res.data[0].url;
-        setTimeout(() => {
-          curAudio.pause();
-        }, 500);
-      });
+    let curMusicID = 167827;
+    common_vendor.onMounted(() => {
+      initMusicByID();
     });
+    const initMusicByID = () => {
+      apis_music.getMusicDetailByID(curMusicID).then((detailRes) => {
+        console.log(detailRes);
+        const musicDetail = detailRes.songs[0];
+        apis_music.getMusicUrlByID(curMusicID).then((res) => {
+          curAudio.title = musicDetail.name;
+          audioInfo.name = musicDetail.name;
+          let tempSingerName = "";
+          musicDetail.ar.forEach((singer, index) => {
+            if (index != musicDetail.ar.length - 1) {
+              tempSingerName = tempSingerName + singer.name + "/";
+            } else {
+              tempSingerName = tempSingerName + singer.name;
+            }
+          });
+          console.log("\u6B4C\u624B\u540D\u662F:", tempSingerName);
+          curAudio.singer = tempSingerName;
+          audioInfo.singer = tempSingerName;
+          curAudio.coverImgUrl = musicDetail.al.picUrl;
+          audioInfo.pic = musicDetail.al.picUrl;
+          curAudio.src = res.data[0].url;
+        });
+      });
+    };
     curAudio.onTimeUpdate(() => {
       audioCurTime.value = curAudio.currentTime;
     });
     const OnChangeBottomOpen = (isOpen) => {
       lrcArea.value.onBottomOpenChange(isOpen);
+    };
+    const OnChangeCurMusic = (musicID) => {
+      curMusicID = musicID;
+      initMusicByID();
     };
     return (_ctx, _cache) => {
       return common_vendor.e({
@@ -53,19 +68,23 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       } : {}, {
         e: common_vendor.t(audioInfo.name),
         f: common_vendor.t(audioInfo.singer),
-        g: common_vendor.sr(lrcArea, "17fce13a-0", {
+        g: common_vendor.sr(lrcArea, "1badc801-0", {
           "k": "lrcArea"
         }),
         h: common_vendor.p({
-          ["music-i-d"]: common_vendor.unref(musicID),
+          ["music-i-d"]: common_vendor.unref(curMusicID),
           ["audio-cur-time"]: audioCurTime.value
         }),
         i: common_vendor.o(OnChangeBottomOpen),
-        j: common_vendor.o(() => {
+        j: common_vendor.o(OnChangeCurMusic),
+        k: common_vendor.p({
+          ["cur-music-id"]: common_vendor.unref(curMusicID)
+        }),
+        l: common_vendor.o(() => {
         })
       });
     };
   }
 });
-var MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "D:/web/music/music-client/src/pages/index/index.vue"]]);
+var MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-1badc801"], ["__file", "D:/web/music/music-client/src/pages/index/index.vue"]]);
 wx.createPage(MiniProgramPage);

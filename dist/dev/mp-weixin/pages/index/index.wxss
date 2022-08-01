@@ -1,5 +1,5 @@
 
-.content {
+.content.data-v-1badc801 {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,7 +7,7 @@
   color: white;
   padding-top: 200rpx;
 }
-.background-box {
+.background-box.data-v-1badc801 {
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -16,35 +16,46 @@
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  background-color: #000000;
   filter: blur(50rpx); /*滤镜*/
   transform: scale(1.2);
   z-index: -1;
 }
-.music-info {
+.background-box.data-v-1badc801:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+    z-index: -1;
+}
+.music-info.data-v-1badc801 {
   width: 100vw;
   display: flex;
   box-sizing: border-box;
   padding: 0 50rpx 0 50rpx;
 }
-.music-info-right {
+.music-info-right.data-v-1badc801 {
   display: flex;
   flex: 1;
   padding-left: 30rpx;
   flex-direction: column;
 }
-.album-pic {
+.album-pic.data-v-1badc801 {
   height: 300rpx;
   width: 300rpx;
   /* border: 1rpx solid rgba(0, 0, 0, 0.3); */
   box-shadow: 3px 4px 7px 0px #000000;
   background-size: contain;
 }
-.music-name {
-  font-size: 40rpx;
+.music-name.data-v-1badc801 {
+  font-size: 46rpx;
   font-weight: bolder;
   margin-bottom: 10rpx;
 }
-.music-singer {
-  font-size: 20rpx;
+.music-singer.data-v-1badc801 {
+  font-size: 26rpx;
   font-weight: bolder;
 }

@@ -1,0 +1,1 @@
+<view class="lrc-content-box" style="{{c}}"><view class="lrc-text-list-box" style="{{b}}"><label wx:for="{{a}}" wx:for-item="lrc" wx:key="d" id="{{lrc.b}}" class="{{[lrc.c, 'lrc-text']}}">{{lrc.a}}</label></view></view>

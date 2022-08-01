@@ -66,11 +66,19 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       }
     });
     common_vendor.onMounted(() => {
+      initLrcData();
     });
-    apis_music.getMusicLrcByID(props.musicID).then((lrcRes) => {
-      console.log(lrcRes);
-      arrLrc.value = formatMusicLyrics(lrcRes.lrc.lyric).lyric;
+    common_vendor.watch(() => props.musicID, (musicID, oldMusicID) => {
+      initLrcData();
     });
+    const initLrcData = () => {
+      apis_music.getMusicLrcByID(props.musicID).then((lrcRes) => {
+        console.log(lrcRes);
+        activeIndex.value = 0;
+        lrcScrollTop.value = 0;
+        arrLrc.value = formatMusicLyrics(lrcRes.lrc.lyric).lyric;
+      });
+    };
     const onBottomOpenChange = (isOpen) => {
       console.log("\u6B4C\u8BCD\u7EC4\u4EF6\u89E6\u53D1\u4E86", isOpen);
       if (isOpen) {
@@ -92,7 +100,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             d: lrc.uid
           };
         }),
-        b: common_vendor.s("top:" + common_vendor.unref(contentHeight) / 2 + "rpx;transform:translateY(" + common_vendor.unref(lrcScrollTop) + "px"),
+        b: common_vendor.s("top:" + (common_vendor.unref(contentHeight) / 2 - 13) + "rpx;transform:translateY(" + common_vendor.unref(lrcScrollTop) + "px"),
         c: common_vendor.s("height:" + common_vendor.unref(contentHeight) + "rpx")
       };
     };

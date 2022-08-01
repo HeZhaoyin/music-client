@@ -4,8 +4,8 @@
         "ignore": []
     },
     "setting": {
-        "urlCheck": false,
-        "es6": true,
+        "urlCheck": true,
+        "es6": false,
         "enhance": true,
         "postcss": true,
         "preloadBackgroundData": false,
@@ -42,9 +42,9 @@
         "ignoreUploadUnusedFiles": true
     },
     "compileType": "miniprogram",
-    "libVersion": "",
+    "libVersion": "2.25.1",
     "appid": "wxb04b769198089ace",
-    "projectname": "%E9%9F%B3%E4%B9%90%E5%88%86%E4%BA%AB%E5%8F%B0",
+    "projectname": "",
     "condition": {
         "search": {
             "list": []

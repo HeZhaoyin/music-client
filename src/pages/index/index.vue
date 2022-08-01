@@ -16,19 +16,21 @@
         <text class="music-singer">{{ audioInfo.singer }}</text>
       </view>
     </view>
-    <!-- <button @click="onStopMusicBtn">停止播放</button>
-    <button @click="onStartMusicBtn">开始播放</button> -->
     <lrc-area
       ref="lrcArea"
-      :music-i-d="musicID"
+      :music-i-d="curMusicID"
       :audio-cur-time="audioCurTime"
     ></lrc-area>
-    <player-bottom @change-bottom-open="OnChangeBottomOpen"></player-bottom>
+    <player-bottom
+      :cur-music-id="curMusicID"
+      @change-bottom-open="OnChangeBottomOpen"
+      @change-cur-music="OnChangeCurMusic"
+    ></player-bottom>
   </view>
 </template>
 
 <script setup lang="ts">
-import { reactive, Ref, ref, toRefs } from "vue";
+import { onMounted, reactive, Ref, ref, toRefs } from "vue";
 import { getMusicUrlByID, getMusicDetailByID } from "@/apis/music";
 import PlayerBottom from "./components/PlayerBottom.vue";
 import LrcArea from "./components/LrcArea.vue";
@@ -48,34 +50,41 @@ const audioInfo: AudioInfo = reactive({
   singer: "",
   pic: "",
 });
-let musicID: number = 28403111;
+let curMusicID: number = 167827;
 
-getMusicDetailByID(musicID).then((detailRes: any) => {
-  console.log(detailRes);
-  const musicDetail = detailRes.songs[0];
-  getMusicUrlByID(musicID).then((res: any) => {
-    curAudio.title = musicDetail.name;
-    audioInfo.name = musicDetail.name;
-    curAudio.singer = musicDetail.ar[0].name;
-    audioInfo.singer = musicDetail.ar[0].name;
-    curAudio.coverImgUrl = musicDetail.al.picUrl;
-    audioInfo.pic = musicDetail.al.picUrl;
-    curAudio.src = res.data[0].url;
-    setTimeout(() => {
-      curAudio.pause();
-    }, 500);
-
-    // curAudio.volume = 0.15;
-    // curAudio.play();
-  });
+onMounted(() => {
+  initMusicByID();
 });
 
-const onStopMusicBtn = () => {
-  curAudio.pause();
-};
+const initMusicByID = () => {
+  getMusicDetailByID(curMusicID).then((detailRes: any) => {
+    console.log(detailRes);
+    const musicDetail = detailRes.songs[0];
+    getMusicUrlByID(curMusicID).then((res: any) => {
+      curAudio.title = musicDetail.name;
+      audioInfo.name = musicDetail.name;
+      let tempSingerName = "";
+      musicDetail.ar.forEach((singer: any, index: number) => {
+        if (index != musicDetail.ar.length - 1) {
+          tempSingerName = tempSingerName + singer.name + "/";
+        } else {
+          tempSingerName = tempSingerName + singer.name;
+        }
+      });
+      console.log("歌手名是:", tempSingerName);
+      curAudio.singer = tempSingerName;
+      audioInfo.singer = tempSingerName;
+      curAudio.coverImgUrl = musicDetail.al.picUrl;
+      audioInfo.pic = musicDetail.al.picUrl;
+      curAudio.src = res.data[0].url;
+      // setTimeout(() => {
+      //   curAudio.pause();
+      // }, 500);
 
-const onStartMusicBtn = () => {
-  curAudio.play();
+      // curAudio.volume = 0.15;
+      // curAudio.play();
+    });
+  });
 };
 
 curAudio.onTimeUpdate(() => {
@@ -85,9 +94,14 @@ curAudio.onTimeUpdate(() => {
 const OnChangeBottomOpen = (isOpen: boolean) => {
   lrcArea.value.onBottomOpenChange(isOpen);
 };
+
+const OnChangeCurMusic = (musicID: number) => {
+  curMusicID = musicID;
+  initMusicByID();
+};
 </script>
 
-<style>
+<style scoped>
 .content {
   display: flex;
   flex-direction: column;
@@ -106,9 +120,20 @@ const OnChangeBottomOpen = (isOpen: boolean) => {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  background-color: #000000;
   filter: blur(50rpx); /*滤镜*/
   transform: scale(1.2);
   z-index: -1;
+}
+.background-box:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+    z-index: -1;
 }
 
 .music-info {
@@ -134,12 +159,12 @@ const OnChangeBottomOpen = (isOpen: boolean) => {
 }
 
 .music-name {
-  font-size: 40rpx;
+  font-size: 46rpx;
   font-weight: bolder;
   margin-bottom: 10rpx;
 }
 .music-singer {
-  font-size: 20rpx;
+  font-size: 26rpx;
   font-weight: bolder;
 }
 </style>
